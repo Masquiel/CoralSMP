@@ -4,16 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malakai — False Prophet of Emris</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Ccircle cx='128' cy='128' r='120' fill='none' stroke='%23d4b05a' stroke-width='6' opacity='0.7'/%3E%3Ccircle cx='128' cy='128' r='108' fill='none' stroke='%23d4b05a' stroke-width='2' opacity='0.35'/%3E%3Cline x1='128' y1='8' x2='128' y2='24' stroke='%23d4b05a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='128' y1='232' x2='128' y2='248' stroke='%23d4b05a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='8' y1='128' x2='24' y2='128' stroke='%23d4b05a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='232' y1='128' x2='248' y2='128' stroke='%23d4b05a' stroke-width='4' opacity='0.6'/%3E%3Ctext x='128' y='172' font-family='Georgia%2C serif' font-size='168' font-weight='700' text-anchor='middle' fill='%23f0e4b0'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Ccircle cx='128' cy='128' r='120' fill='none' stroke='%23e8c84a' stroke-width='6' opacity='0.7'/%3E%3Ccircle cx='128' cy='128' r='108' fill='none' stroke='%23e8c84a' stroke-width='2' opacity='0.35'/%3E%3Cline x1='128' y1='8' x2='128' y2='24' stroke='%23e8c84a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='128' y1='232' x2='128' y2='248' stroke='%23e8c84a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='8' y1='128' x2='24' y2='128' stroke='%23e8c84a' stroke-width='4' opacity='0.6'/%3E%3Cline x1='232' y1='128' x2='248' y2='128' stroke='%23e8c84a' stroke-width='4' opacity='0.6'/%3E%3Ctext x='128' y='172' font-family='Georgia%2C serif' font-size='168' font-weight='700' text-anchor='middle' fill='%23f5e98a'%3EM%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --gold:#d4b05a;--gold-dim:#8f7040;--gold-pale:#f0e4b0;
-  --ink:#03020a;--surface:#141109;--surface2:#1e1a10;
-  --border:#2e2618;--border-bright:#46361e;
-  --text:#e2d8b8;--text-dim:#a89870;--text-muted:#6a5c3e;
-  --teal:#3d7a78;--red:#7a2424;
+  --gold:#e8c84a;--gold-dim:#9e8828;--gold-pale:#f5e98a;
+  --emris-blue:#4a7eb5;--emris-blue-dim:#2d5280;
+  --ink:#02030c;--surface:#0d1018;--surface2:#141a28;
+  --border:#1c2535;--border-bright:#2c3e5a;
+  --text:#d8e4f0;--text-dim:#8898b8;--text-muted:#485870;
+  --teal:#4a7eb5;--red:#c03030;
 }
 html{scroll-behavior:smooth}
 body{
@@ -26,16 +27,16 @@ body{
 .vignette{
   position:fixed;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(ellipse 70% 70% at 50% 50%,transparent 40%,rgba(2,1,8,.65) 100%),
-    radial-gradient(ellipse 100% 45% at 50% 0%,rgba(3,2,10,.92) 0%,transparent 60%),
-    radial-gradient(ellipse 100% 40% at 50% 100%,rgba(1,6,14,.95) 0%,transparent 65%);
+    radial-gradient(ellipse 70% 70% at 50% 50%,transparent 40%,rgba(2,3,12,.65) 100%),
+    radial-gradient(ellipse 100% 45% at 50% 0%,rgba(2,3,14,.92) 0%,transparent 60%),
+    radial-gradient(ellipse 100% 40% at 50% 100%,rgba(1,4,16,.95) 0%,transparent 65%);
 }
 .sea-shimmer{
   position:fixed;bottom:0;left:-10%;right:-10%;z-index:2;height:100px;pointer-events:none;
 }
 .shimmer-line{
   position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right,transparent,rgba(61,122,120,.7),transparent);
+  background:linear-gradient(to right,transparent,rgba(74,126,181,.55),transparent);
 }
 .shimmer-line:nth-child(1){bottom:20px;animation:shimmer 9s ease-in-out infinite}
 .shimmer-line:nth-child(2){bottom:42px;animation:shimmer 13s ease-in-out infinite reverse;opacity:.5}
@@ -65,16 +66,16 @@ body{
 .eye-container{width:52px;height:52px;margin:0 auto 26px;position:relative}
 .eye-ring{
   position:absolute;inset:0;border-radius:50%;
-  border:1px solid rgba(201,168,76,.22);
+  border:1px solid rgba(232,200,74,.28);
   animation:pulse 5s ease-in-out infinite;
 }
 .eye-ring:nth-child(2){
-  inset:10px;border-color:rgba(61,122,120,.2);
+  inset:10px;border-color:rgba(74,126,181,.25);
   animation-duration:7s;animation-delay:-3s;
 }
 .eye-dot{
   position:absolute;inset:20px;border-radius:50%;
-  background:radial-gradient(circle,rgba(61,122,120,.5),transparent);
+  background:radial-gradient(circle,rgba(74,126,181,.6),transparent);
   animation:pulse 4s ease-in-out infinite alternate;
 }
 @keyframes pulse{
@@ -124,12 +125,12 @@ h1.name{
 }
 .panel::before{
   content:"";position:absolute;top:5px;left:5px;right:5px;bottom:5px;
-  border:1px solid rgba(55,40,20,.3);pointer-events:none;
+  border:1px solid rgba(28,37,53,.4);pointer-events:none;
 }
 .panel::after{
   content:"";position:absolute;top:-1px;right:-1px;
   width:14px;height:14px;
-  border-top:1px solid var(--gold-dim);border-right:1px solid var(--gold-dim);
+  border-top:1px solid var(--emris-blue-dim);border-right:1px solid var(--emris-blue-dim);
 }
 .panel p+p{margin-top:14px}
 
@@ -156,7 +157,7 @@ h1.name{
 }
 .pi::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:0;
-  background:linear-gradient(to right,rgba(61,122,120,.07),transparent);
+  background:linear-gradient(to right,rgba(74,126,181,.08),transparent);
   transition:width .35s;
 }
 .pi:hover::before{width:100%}
@@ -185,7 +186,7 @@ h1.name{
 .pcy-content{padding:22px 24px 24px;border-top:1px solid var(--border)}
 .pcy-content blockquote{
   font-style:italic;font-size:18px;color:var(--gold-pale);
-  border-left:2px solid var(--gold-dim);padding-left:20px;
+  border-left:2px solid var(--emris-blue-dim);padding-left:20px;
   margin-bottom:14px;line-height:1.7;
 }
 .pcy-content .note{font-size:13px;color:var(--text-dim)}
@@ -196,18 +197,18 @@ h1.name{
 
 /* TRUTH */
 .truth{
-  background:var(--surface);border:1px solid rgba(122,36,36,.45);
+  background:var(--surface);border:1px solid rgba(160,30,30,.5);
   padding:28px 32px;position:relative;overflow:hidden;
 }
 .truth::before{
   content:"";position:absolute;top:-50px;right:-50px;
   width:180px;height:180px;
-  background:radial-gradient(circle,rgba(122,36,36,.05),transparent 70%);
+  background:radial-gradient(circle,rgba(160,30,30,.08),transparent 70%);
   pointer-events:none;
 }
 .truth-hd{display:flex;align-items:center;gap:14px;margin-bottom:22px}
 .truth-seal{
-  width:32px;height:32px;border:1px solid rgba(122,36,36,.55);
+  width:32px;height:32px;border:1px solid rgba(160,30,30,.6);
   display:flex;align-items:center;justify-content:center;
   font-family:"Cinzel",serif;font-size:14px;color:var(--red);flex-shrink:0;
 }
@@ -217,16 +218,16 @@ h1.name{
 
 /* PRING */
 .pring{
-  border:1px solid rgba(61,122,120,.28);padding:26px 32px;
-  background:var(--surface);position:relative;overflow:hidden;margin-top:16px;
+  border:1px solid rgba(192,48,48,.35);padding:26px 32px;
+  background:#08050a;position:relative;overflow:hidden;margin-top:16px;
 }
 .pring::after{
   content:"?";position:absolute;right:20px;top:10px;
   font-family:"Cinzel Decorative",serif;font-size:90px;
-  color:rgba(61,122,120,.04);pointer-events:none;line-height:1;
+  color:rgba(192,48,48,.07);pointer-events:none;line-height:1;
 }
-.pring-label{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;color:var(--teal);margin-bottom:10px;display:block}
-.pring-name{font-family:"Cinzel",serif;font-size:22px;color:rgba(100,180,178,.75);margin-bottom:12px}
+.pring-label{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;color:#c03030;margin-bottom:10px;display:block}
+.pring-name{font-family:"Cinzel",serif;font-size:22px;color:rgba(220,90,90,.8);margin-bottom:12px}
 .pring-desc{font-size:15px;color:var(--text-dim);font-style:italic;line-height:1.9}
 
 /* LIKES & DISLIKES */
@@ -237,7 +238,7 @@ h1.name{
   font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
   text-transform:uppercase;margin-bottom:16px;display:block;
 }
-.likes-pos{color:var(--teal)}
+.likes-pos{color:var(--emris-blue)}
 .likes-neg{color:var(--red)}
 .likes-list{list-style:none;display:flex;flex-direction:column;gap:10px}
 .likes-list li{
@@ -266,7 +267,7 @@ h1.name{
   margin:0 auto 16px;display:flex;align-items:center;justify-content:center;position:relative;
 }
 .footer-seal::before{
-  content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(55,40,20,.4);
+  content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(28,37,53,.5);
 }
 .footer-glyph{font-family:"Cinzel",serif;font-size:16px;color:var(--text-muted)}
 .footer-text{font-family:"Cinzel",serif;font-size:10px;letter-spacing:4px;color:var(--text-muted)}
@@ -287,13 +288,13 @@ h1.name{
 
 <!-- ritual circle: fixed behind content -->
 <svg id="ritualCircle" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="360" cy="360" r="340" fill="none" stroke="#c9a84c" stroke-width="0.7"/>
-  <circle cx="360" cy="360" r="305" fill="none" stroke="#c9a84c" stroke-width="0.4"/>
-  <circle cx="360" cy="360" r="250" fill="none" stroke="#3d7a78" stroke-width="0.55"/>
-  <circle cx="360" cy="360" r="170" fill="none" stroke="#c9a84c" stroke-width="0.4"/>
-  <circle cx="360" cy="360" r="80"  fill="none" stroke="#3d7a78" stroke-width="0.4"/>
+  <circle cx="360" cy="360" r="340" fill="none" stroke="#e8c84a" stroke-width="0.7"/>
+  <circle cx="360" cy="360" r="305" fill="none" stroke="#e8c84a" stroke-width="0.4"/>
+  <circle cx="360" cy="360" r="250" fill="none" stroke="#4a7eb5" stroke-width="0.55"/>
+  <circle cx="360" cy="360" r="170" fill="none" stroke="#e8c84a" stroke-width="0.4"/>
+  <circle cx="360" cy="360" r="80"  fill="none" stroke="#4a7eb5" stroke-width="0.4"/>
   <!-- tick marks on outer ring -->
-  <g stroke="#c9a84c" stroke-width="0.6">
+  <g stroke="#e8c84a" stroke-width="0.6">
     <line x1="360" y1="20" x2="360" y2="48"/>
     <line x1="360" y1="672" x2="360" y2="700"/>
     <line x1="20" y1="360" x2="48" y2="360"/>
@@ -313,16 +314,16 @@ h1.name{
   </g>
   <!-- heptagram -->
   <polygon points="360,115 435,305 630,305 475,415 530,610 360,495 190,610 245,415 90,305 285,305"
-    fill="none" stroke="#c9a84c" stroke-width="0.55" opacity="0.75"/>
+    fill="none" stroke="#e8c84a" stroke-width="0.55" opacity="0.75"/>
   <!-- inner triangle -->
   <polygon points="360,210 505,455 215,455"
-    fill="none" stroke="#3d7a78" stroke-width="0.5" opacity="0.65"/>
+    fill="none" stroke="#4a7eb5" stroke-width="0.5" opacity="0.65"/>
   <!-- eye at center -->
-  <ellipse cx="360" cy="360" rx="44" ry="27" fill="none" stroke="#c9a84c" stroke-width="0.7"/>
-  <circle  cx="360" cy="360" r="16"  fill="none" stroke="#3d7a78" stroke-width="0.6"/>
-  <circle  cx="360" cy="360" r="5"   fill="#c9a84c" opacity="0.55"/>
+  <ellipse cx="360" cy="360" rx="44" ry="27" fill="none" stroke="#e8c84a" stroke-width="0.7"/>
+  <circle  cx="360" cy="360" r="16"  fill="none" stroke="#4a7eb5" stroke-width="0.6"/>
+  <circle  cx="360" cy="360" r="5"   fill="#e8c84a" opacity="0.55"/>
   <!-- abstract rune marks around middle ring -->
-  <g stroke="#c9a84c" stroke-width="0.55" fill="none" opacity="0.65">
+  <g stroke="#e8c84a" stroke-width="0.55" fill="none" opacity="0.65">
     <path d="M360,60 l-5,15 l10,0 l-5,-15"/>
     <path d="M458,84 l-9,13 l9,4 l-9,0"/>
     <path d="M262,84 l9,13 l-9,4 l9,0"/>
@@ -556,24 +557,24 @@ function draw(t) {
 
   /* base gradient */
   const g = cx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0,    '#020109');
-  g.addColorStop(0.28, '#04020e');
-  g.addColorStop(0.55, '#030710');
-  g.addColorStop(0.82, '#020b14');
-  g.addColorStop(1,    '#010a10');
+  g.addColorStop(0,    '#02030c');
+  g.addColorStop(0.28, '#030510');
+  g.addColorStop(0.55, '#020814');
+  g.addColorStop(0.82, '#020a18');
+  g.addColorStop(1,    '#01080f');
   cx.fillStyle = g;
   cx.fillRect(0, 0, W, H);
 
   /* nebula wisps */
   const n1x = W * 0.32 + Math.sin(wo * 0.4) * 35;
   const nb1 = cx.createRadialGradient(n1x, H * 0.25, 0, n1x, H * 0.25, W * 0.32);
-  nb1.addColorStop(0, 'rgba(38,18,65,.08)');
+  nb1.addColorStop(0, 'rgba(20,40,90,.09)');
   nb1.addColorStop(1, 'transparent');
   cx.fillStyle = nb1; cx.fillRect(0, 0, W, H);
 
   const n2x = W * 0.7 + Math.cos(wo * 0.3) * 28;
   const nb2 = cx.createRadialGradient(n2x, H * 0.42, 0, n2x, H * 0.42, W * 0.26);
-  nb2.addColorStop(0, 'rgba(12,45,45,.06)');
+  nb2.addColorStop(0, 'rgba(55,45,10,.07)');
   nb2.addColorStop(1, 'transparent');
   cx.fillStyle = nb2; cx.fillRect(0, 0, W, H);
 
@@ -582,16 +583,16 @@ function draw(t) {
     const tw = 0.45 + 0.55 * Math.sin(p.tp + t * p.ts);
     const al = p.a * tw;
     if (p.gold) {
-      cx.fillStyle = `rgba(201,168,76,${al * 0.75})`;
+      cx.fillStyle = `rgba(232,200,74,${al * 0.75})`;
       cx.beginPath(); cx.arc(p.x, p.y, p.r * 1.4, 0, Math.PI * 2); cx.fill();
-      cx.strokeStyle = `rgba(201,168,76,${al * 0.28})`;
+      cx.strokeStyle = `rgba(232,200,74,${al * 0.28})`;
       cx.lineWidth = 0.4;
       cx.beginPath();
       cx.moveTo(p.x - 3.5, p.y); cx.lineTo(p.x + 3.5, p.y);
       cx.moveTo(p.x, p.y - 3.5); cx.lineTo(p.x, p.y + 3.5);
       cx.stroke();
     } else {
-      cx.fillStyle = `rgba(215,198,160,${al})`;
+      cx.fillStyle = `rgba(160,195,235,${al * 0.7})`;
       cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI * 2); cx.fill();
     }
     p.y += p.vy; p.x += p.vx;
@@ -611,7 +612,7 @@ function draw(t) {
     for (let x = 0; x <= W; x += 3) {
       cx.lineTo(x, by + Math.sin(x * freq + phase) * amp);
     }
-    cx.strokeStyle = `rgba(61,122,120,${0.065 - i * 0.013})`;
+    cx.strokeStyle = `rgba(74,126,181,${0.07 - i * 0.013})`;
     cx.lineWidth = 0.8;
     cx.stroke();
   }
