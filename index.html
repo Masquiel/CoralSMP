@@ -229,6 +229,36 @@ h1.name{
 .pring-name{font-family:"Cinzel",serif;font-size:22px;color:rgba(100,180,178,.75);margin-bottom:12px}
 .pring-desc{font-size:15px;color:var(--text-dim);font-style:italic;line-height:1.9}
 
+/* LIKES & DISLIKES */
+.likes-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.likes-grid{grid-template-columns:1fr}}
+.likes-col{background:var(--surface);border:1px solid var(--border);padding:22px 24px}
+.likes-label{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:16px;display:block;
+}
+.likes-pos{color:var(--teal)}
+.likes-neg{color:var(--red)}
+.likes-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.likes-list li{
+  font-size:15px;color:var(--text-dim);padding-left:14px;position:relative;line-height:1.6;
+}
+.likes-list li::before{
+  content:"—";position:absolute;left:0;color:var(--text-muted);font-size:12px;top:3px;
+}
+
+/* APPEARANCE */
+.appear-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1px;border:1px solid var(--border);overflow:hidden;
+}
+.appear-item{background:var(--surface);padding:20px 22px}
+.appear-label{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
+  color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;
+}
+.appear-val{font-size:14.5px;color:var(--text-dim);line-height:1.7}
+
 /* FOOTER */
 .footer{text-align:center;padding:50px 0 20px}
 .footer-seal{
@@ -355,6 +385,47 @@ h1.name{
       <div class="stat"><div class="stat-label">Faith</div><div class="stat-value">Emris</div></div>
       <div class="stat"><div class="stat-label">Status</div><div class="stat-value">Receiving Visions</div></div>
       <div class="stat"><div class="stat-label">Alignment</div><div class="stat-value u">Unknown</div></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="sec-label">Visual Reference</div>
+    <div class="sec-title">Appearance</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-label">Skin</div><div class="stat-value">Light, warm undertone</div></div>
+      <div class="stat"><div class="stat-label">Hair</div><div class="stat-value">Dark with white streaks</div></div>
+      <div class="stat"><div class="stat-label">Eyes</div><div class="stat-value">Teal / sea-green</div></div>
+      <div class="stat"><div class="stat-label">Build</div><div class="stat-value">Lean, still</div></div>
+    </div>
+    <div class="panel" style="margin-top:1px;border-top:none;">
+      <p>Layered dark clothing — navy, slate, muted teal. Hood kept down unless near water. Always has his book on him. The white streaks in his hair and the colour of his eyes make him look like the island already knew he was coming.</p>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="sec-label">Disposition</div>
+    <div class="sec-title">Likes &amp; Dislikes</div>
+    <div class="likes-grid">
+      <div class="likes-col">
+        <div class="likes-label likes-pos">✦ Drawn To</div>
+        <ul class="likes-list">
+          <li>The ocean at night or just before dawn</li>
+          <li>Silence and open sky</li>
+          <li>People who ask real questions</li>
+          <li>Candlelight, slow-burning things</li>
+          <li>Rain, and the smell after it</li>
+        </ul>
+      </div>
+      <div class="likes-col">
+        <div class="likes-label likes-neg">✗ Averse To</div>
+        <ul class="likes-list">
+          <li>Loud, chaotic places</li>
+          <li>Mockery of his faith</li>
+          <li>Lying — he's bad at it and it unsettles him</li>
+          <li>Fire that feels uncontrolled</li>
+          <li>The feeling something is being kept from him</li>
+        </ul>
+      </div>
     </div>
   </section>
 
