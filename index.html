@@ -10,12 +10,33 @@
 <style>
 
 body{
-background:#0b0907;
-color:#e6dcc8;
-font-family:"EB Garamond",serif;
 margin:0;
-padding:0;
+background:#0a0907;
+font-family:"EB Garamond",serif;
+color:#e8dcc3;
+overflow-x:hidden;
 }
+
+/* subtle moving background */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 30% 30%, rgba(80,60,20,.2), transparent 60%),
+radial-gradient(circle at 70% 70%, rgba(80,60,20,.15), transparent 60%);
+animation:drift 40s linear infinite;
+z-index:-1;
+}
+
+@keyframes drift{
+0%{transform:translate(0,0)}
+100%{transform:translate(-200px,-200px)}
+}
+
+/* container */
 
 .container{
 max-width:900px;
@@ -23,46 +44,111 @@ margin:auto;
 padding:60px 20px;
 }
 
+/* ritual circle */
+
+.circle{
+position:absolute;
+top:120px;
+left:50%;
+transform:translateX(-50%);
+width:320px;
+height:320px;
+border:1px solid rgba(200,170,90,.2);
+border-radius:50%;
+animation:spin 40s linear infinite;
+}
+
+.circle:before{
+content:"✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶";
+position:absolute;
+width:100%;
+top:45%;
+text-align:center;
+letter-spacing:15px;
+color:#7d6332;
+font-size:20px;
+}
+
+@keyframes spin{
+0%{transform:translateX(-50%) rotate(0)}
+100%{transform:translateX(-50%) rotate(360deg)}
+}
+
+/* header */
+
 h1{
 font-family:"Cinzel",serif;
-font-size:56px;
-letter-spacing:6px;
 text-align:center;
+font-size:64px;
+letter-spacing:8px;
 color:#d9c28a;
+margin-bottom:5px;
+text-shadow:0 0 20px rgba(200,170,90,.2);
 }
 
 .subtitle{
 text-align:center;
-letter-spacing:3px;
-margin-bottom:40px;
-color:#8f7a52;
+letter-spacing:4px;
+color:#8c7a52;
+margin-bottom:60px;
 }
 
+/* divider */
+
+.divider{
+height:2px;
+margin:50px 0;
+background:linear-gradient(to right,transparent,#7b5f36,transparent);
+}
+
+/* sections */
+
 .section{
-margin-top:50px;
+margin-bottom:40px;
 }
 
 .section-title{
 font-family:"Cinzel",serif;
-letter-spacing:3px;
 font-size:22px;
+letter-spacing:3px;
 margin-bottom:15px;
 color:#d9c28a;
 }
 
-.box{
-background:#14110d;
-border:1px solid #3a2e22;
-padding:20px;
-margin-bottom:15px;
+/* manuscript panels */
+
+.panel{
+background:#15120e;
+border:1px solid #3b2e1e;
+padding:22px;
+box-shadow:0 0 30px rgba(0,0,0,.6);
 }
 
+/* vision blocks */
+
 .vision{
-background:#0f0c09;
+background:#0f0d0a;
 border-left:4px solid #a67c3b;
 padding:15px;
-font-style:italic;
 margin-bottom:10px;
+font-style:italic;
+transition:.3s;
+}
+
+.vision:hover{
+box-shadow:0 0 10px rgba(200,170,90,.3);
+}
+
+/* collapsible prophecy */
+
+details{
+margin-bottom:10px;
+}
+
+summary{
+cursor:pointer;
+font-weight:bold;
+color:#d1bb87;
 }
 
 .secret{
@@ -72,17 +158,13 @@ padding:20px;
 color:#bca97e;
 }
 
-.divider{
-height:2px;
-margin:40px 0;
-background:linear-gradient(to right,transparent,#7b5f36,transparent);
-}
-
 </style>
 
 </head>
 
 <body>
+
+<div class="circle"></div>
 
 <div class="container">
 
@@ -95,10 +177,10 @@ background:linear-gradient(to right,transparent,#7b5f36,transparent);
 
 <div class="section-title">Overview</div>
 
-<div class="box">
-Masquiel believes himself chosen by the god Emris to interpret divine signs and guide others toward sacred purpose.
+<div class="panel">
+Masquiel believes himself chosen by the god Emris to interpret divine signs.
 
-Through dreams and whispers carried by the sea, he records visions that he believes come from the heavens.
+Through dreams, whispers, and the endless rhythm of the sea, he records prophecies he believes come from the heavens.
 
 Yet the voice guiding him may not belong to Emris at all.
 </div>
@@ -109,11 +191,13 @@ Yet the voice guiding him may not belong to Emris at all.
 
 <div class="section-title">Character Information</div>
 
-<div class="box">
+<div class="panel">
+
 Role: Cultist / Prophet<br>
 Faith: Emris<br>
 Status: Receiving Visions<br>
 Alignment: Unknown
+
 </div>
 
 </div>
@@ -122,30 +206,41 @@ Alignment: Unknown
 
 <div class="section-title">Religious Practices</div>
 
-<div class="box">
+<div class="panel">
+
 • Records visions in a personal manuscript<br>
-• Observes the ocean for divine signs<br>
-• Performs rituals at night<br>
+• Watches the ocean for divine signs<br>
+• Performs rituals during the quiet hours of night<br>
 • Spreads the word of Emris
+
 </div>
 
 </div>
 
 <div class="section">
 
-<div class="section-title">Recorded Visions</div>
+<div class="section-title">Prophecy Log</div>
 
+<details>
+<summary>Vision I</summary>
 <div class="vision">
 "The ocean whispers your purpose."
 </div>
+</details>
 
+<details>
+<summary>Vision II</summary>
 <div class="vision">
 "The island will become sacred ground."
 </div>
+</details>
 
+<details>
+<summary>Vision III</summary>
 <div class="vision">
 "The faithful must prepare."
 </div>
+</details>
 
 </div>
 
@@ -154,9 +249,13 @@ Alignment: Unknown
 <div class="section-title">Hidden Truth</div>
 
 <div class="secret">
-The voice Masquiel follows may belong to another god entirely.
 
-A being that hides behind the name of Emris and slowly guides the prophet toward unknown goals.
+The voice Masquiel hears may belong to another god entirely.
+
+A being that hides behind the name of Emris and slowly shapes the prophet's path for its own unknown purpose.
+
+Masquiel has yet to realize the deception.
+
 </div>
 
 </div>
@@ -164,4 +263,5 @@ A being that hides behind the name of Emris and slowly guides the prophet toward
 </div>
 
 </body>
+
 </html>
