@@ -1,267 +1,575 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Masquiel — False Prophet</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masquiel — False Prophet of Emris</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
-
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;--gold-dim:#7d6332;--gold-pale:#e8d8a0;
+  --ink:#03020a;--surface:#0f0d09;--surface2:#181410;
+  --border:#26201a;--border-bright:#3a2d1c;
+  --text:#cdc09a;--text-dim:#7a6e50;--text-muted:#3d3322;
+  --teal:#3d7a78;--red:#7a2424;
+}
+html{scroll-behavior:smooth}
 body{
-margin:0;
-background:#0a0907;
-font-family:"EB Garamond",serif;
-color:#e8dcc3;
-overflow-x:hidden;
+  background:var(--ink);color:var(--text);
+  font-family:"IM Fell English",Georgia,serif;
+  font-size:16px;line-height:1.85;overflow-x:hidden;
+}
+#bgCanvas{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+.vignette{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 65% at 50% 50%,transparent 35%,rgba(2,1,8,.8) 100%),
+    radial-gradient(ellipse 100% 45% at 50% 0%,rgba(3,2,10,.95) 0%,transparent 60%),
+    radial-gradient(ellipse 100% 40% at 50% 100%,rgba(1,6,14,.98) 0%,transparent 65%);
+}
+.sea-shimmer{
+  position:fixed;bottom:0;left:-10%;right:-10%;z-index:2;height:100px;pointer-events:none;
+}
+.shimmer-line{
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,transparent,rgba(61,122,120,.7),transparent);
+}
+.shimmer-line:nth-child(1){bottom:20px;animation:shimmer 9s ease-in-out infinite}
+.shimmer-line:nth-child(2){bottom:42px;animation:shimmer 13s ease-in-out infinite reverse;opacity:.5}
+.shimmer-line:nth-child(3){bottom:66px;animation:shimmer 17s ease-in-out infinite;opacity:.3}
+@keyframes shimmer{
+  0%,100%{transform:translateX(0) scaleX(1)}
+  50%{transform:translateX(-6%) scaleX(1.08)}
+}
+#ritualCircle{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;
+  opacity:.055;
+  width:min(720px,92vw);height:min(720px,92vw);
+}
+.page{
+  position:relative;z-index:10;
+  max-width:820px;margin:0 auto;padding:80px 24px 140px;
 }
 
-/* subtle moving background */
+/* HEADER */
+.header{text-align:center;padding:70px 0 50px}
+.header-pre{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:8px;
+  color:var(--text-muted);margin-bottom:24px;text-transform:uppercase;
+}
+.eye-container{width:52px;height:52px;margin:0 auto 26px;position:relative}
+.eye-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(201,168,76,.22);
+  animation:pulse 5s ease-in-out infinite;
+}
+.eye-ring:nth-child(2){
+  inset:10px;border-color:rgba(61,122,120,.2);
+  animation-duration:7s;animation-delay:-3s;
+}
+.eye-dot{
+  position:absolute;inset:20px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,122,120,.5),transparent);
+  animation:pulse 4s ease-in-out infinite alternate;
+}
+@keyframes pulse{
+  0%,100%{opacity:.35;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+h1.name{
+  font-family:"Cinzel Decorative",serif;
+  font-size:clamp(36px,8vw,68px);
+  letter-spacing:.1em;color:var(--gold-pale);
+  font-weight:400;line-height:1;margin-bottom:14px;
+}
+.epithet{
+  font-family:"IM Fell English",serif;font-style:italic;
+  font-size:19px;color:var(--text-dim);margin-bottom:20px;
+}
+.faith-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--border-bright);padding:6px 20px;
+  font-family:"Cinzel",serif;font-size:11px;letter-spacing:3px;color:var(--gold-dim);
+}
+.faith-badge::before,.faith-badge::after{content:"✦";color:var(--text-muted)}
 
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:
-radial-gradient(circle at 30% 30%, rgba(80,60,20,.2), transparent 60%),
-radial-gradient(circle at 70% 70%, rgba(80,60,20,.15), transparent 60%);
-animation:drift 40s linear infinite;
-z-index:-1;
+/* DIVIDERS */
+.sdiv{display:flex;align-items:center;gap:18px;margin:46px 0}
+.sdiv-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border-bright),transparent)}
+.sdiv-glyph{
+  font-family:"Cinzel",serif;font-size:12px;letter-spacing:6px;
+  color:var(--gold-dim);flex-shrink:0;
 }
 
-@keyframes drift{
-0%{transform:translate(0,0)}
-100%{transform:translate(-200px,-200px)}
+/* SECTIONS */
+.section{margin-bottom:52px}
+.sec-label{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:4px;
+  color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;
+}
+.sec-title{
+  font-family:"Cinzel",serif;font-size:20px;letter-spacing:2px;
+  color:var(--gold);margin-bottom:22px;font-weight:600;
 }
 
-/* container */
-
-.container{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
-
-/* ritual circle */
-
-.circle{
-position:absolute;
-top:120px;
-left:50%;
-transform:translateX(-50%);
-width:320px;
-height:320px;
-border:1px solid rgba(200,170,90,.2);
-border-radius:50%;
-animation:spin 40s linear infinite;
-}
-
-.circle:before{
-content:"✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶";
-position:absolute;
-width:100%;
-top:45%;
-text-align:center;
-letter-spacing:15px;
-color:#7d6332;
-font-size:20px;
-}
-
-@keyframes spin{
-0%{transform:translateX(-50%) rotate(0)}
-100%{transform:translateX(-50%) rotate(360deg)}
-}
-
-/* header */
-
-h1{
-font-family:"Cinzel",serif;
-text-align:center;
-font-size:64px;
-letter-spacing:8px;
-color:#d9c28a;
-margin-bottom:5px;
-text-shadow:0 0 20px rgba(200,170,90,.2);
-}
-
-.subtitle{
-text-align:center;
-letter-spacing:4px;
-color:#8c7a52;
-margin-bottom:60px;
-}
-
-/* divider */
-
-.divider{
-height:2px;
-margin:50px 0;
-background:linear-gradient(to right,transparent,#7b5f36,transparent);
-}
-
-/* sections */
-
-.section{
-margin-bottom:40px;
-}
-
-.section-title{
-font-family:"Cinzel",serif;
-font-size:22px;
-letter-spacing:3px;
-margin-bottom:15px;
-color:#d9c28a;
-}
-
-/* manuscript panels */
-
+/* PANEL */
 .panel{
-background:#15120e;
-border:1px solid #3b2e1e;
-padding:22px;
-box-shadow:0 0 30px rgba(0,0,0,.6);
+  background:var(--surface);border:1px solid var(--border);
+  padding:28px 32px;position:relative;
+}
+.panel::before{
+  content:"";position:absolute;top:5px;left:5px;right:5px;bottom:5px;
+  border:1px solid rgba(55,40,20,.3);pointer-events:none;
+}
+.panel::after{
+  content:"";position:absolute;top:-1px;right:-1px;
+  width:14px;height:14px;
+  border-top:1px solid var(--gold-dim);border-right:1px solid var(--gold-dim);
+}
+.panel p+p{margin-top:14px}
+
+/* STATS */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+  gap:1px;border:1px solid var(--border);overflow:hidden;
+}
+.stat{background:var(--surface);padding:18px 20px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-label{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;
+  color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;
+}
+.stat-value{font-size:15px;color:var(--text)}
+.stat-value.u{font-style:italic;color:var(--text-dim)}
+
+/* PRACTICES */
+.practice-list{list-style:none;border:1px solid var(--border)}
+.pi{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:17px 24px;border-bottom:1px solid var(--border);
+  transition:background .25s;position:relative;overflow:hidden;
+}
+.pi::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(to right,rgba(61,122,120,.07),transparent);
+  transition:width .35s;
+}
+.pi:hover::before{width:100%}
+.pi:last-child{border-bottom:none}
+.pnum{
+  font-family:"Cinzel",serif;font-size:10px;color:var(--text-muted);
+  letter-spacing:1px;margin-top:4px;flex-shrink:0;width:24px;
+}
+.ptext{font-size:15px;color:var(--text)}
+
+/* PROPHECY */
+.plog{border:1px solid var(--border)}
+.pcy{border-bottom:1px solid var(--border);overflow:hidden}
+.pcy:last-child{border-bottom:none}
+.pcy-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:17px 24px;cursor:pointer;user-select:none;transition:background .2s;gap:16px;
+}
+.pcy-hd:hover{background:var(--surface2)}
+.pcy-num{font-family:"Cinzel",serif;font-size:11px;letter-spacing:3px;color:var(--text-muted);flex-shrink:0}
+.pcy-prev{font-style:italic;color:var(--text-dim);font-size:14px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcy-tog{font-size:11px;color:var(--text-muted);flex-shrink:0;transition:transform .3s}
+.pcy.open .pcy-tog{transform:rotate(180deg)}
+.pcy-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.pcy.open .pcy-body{max-height:320px}
+.pcy-content{padding:22px 24px 24px;border-top:1px solid var(--border)}
+.pcy-content blockquote{
+  font-style:italic;font-size:18px;color:var(--gold-pale);
+  border-left:2px solid var(--gold-dim);padding-left:20px;
+  margin-bottom:14px;line-height:1.7;
+}
+.pcy-content .note{font-size:13px;color:var(--text-dim)}
+.nlabel{
+  font-family:"Cinzel",serif;font-size:10px;letter-spacing:2px;
+  color:var(--text-muted);display:inline;margin-right:6px;
 }
 
-/* vision blocks */
-
-.vision{
-background:#0f0d0a;
-border-left:4px solid #a67c3b;
-padding:15px;
-margin-bottom:10px;
-font-style:italic;
-transition:.3s;
+/* TRUTH */
+.truth{
+  background:var(--surface);border:1px solid rgba(122,36,36,.45);
+  padding:28px 32px;position:relative;overflow:hidden;
 }
-
-.vision:hover{
-box-shadow:0 0 10px rgba(200,170,90,.3);
+.truth::before{
+  content:"";position:absolute;top:-50px;right:-50px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(122,36,36,.05),transparent 70%);
+  pointer-events:none;
 }
-
-/* collapsible prophecy */
-
-details{
-margin-bottom:10px;
+.truth-hd{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.truth-seal{
+  width:32px;height:32px;border:1px solid rgba(122,36,36,.55);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Cinzel",serif;font-size:14px;color:var(--red);flex-shrink:0;
 }
+.truth-title{font-family:"Cinzel",serif;font-size:11px;letter-spacing:3px;color:var(--red);text-transform:uppercase}
+.truth-body{color:var(--text-dim);line-height:1.9}
+.truth-body p+p{margin-top:14px}
 
-summary{
-cursor:pointer;
-font-weight:bold;
-color:#d1bb87;
+/* PRING */
+.pring{
+  border:1px solid rgba(61,122,120,.28);padding:26px 32px;
+  background:var(--surface);position:relative;overflow:hidden;margin-top:16px;
 }
-
-.secret{
-background:#0d0a07;
-border:1px solid #4a3722;
-padding:20px;
-color:#bca97e;
+.pring::after{
+  content:"?";position:absolute;right:20px;top:10px;
+  font-family:"Cinzel Decorative",serif;font-size:90px;
+  color:rgba(61,122,120,.04);pointer-events:none;line-height:1;
 }
+.pring-label{font-family:"Cinzel",serif;font-size:10px;letter-spacing:3px;color:var(--teal);margin-bottom:10px;display:block}
+.pring-name{font-family:"Cinzel",serif;font-size:22px;color:rgba(100,180,178,.75);margin-bottom:12px}
+.pring-desc{font-size:15px;color:var(--text-dim);font-style:italic;line-height:1.9}
 
+/* FOOTER */
+.footer{text-align:center;padding:50px 0 20px}
+.footer-seal{
+  width:60px;height:60px;border-radius:50%;border:1px solid var(--border-bright);
+  margin:0 auto 16px;display:flex;align-items:center;justify-content:center;position:relative;
+}
+.footer-seal::before{
+  content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(55,40,20,.4);
+}
+.footer-glyph{font-family:"Cinzel",serif;font-size:16px;color:var(--text-muted)}
+.footer-text{font-family:"Cinzel",serif;font-size:10px;letter-spacing:4px;color:var(--text-muted)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:600px){
+  .page{padding:40px 16px 80px}
+  h1.name{font-size:34px}
+  .panel,.truth,.pring{padding:20px 18px}
+}
 </style>
-
 </head>
-
 <body>
 
-<div class="circle"></div>
+<canvas id="bgCanvas"></canvas>
 
-<div class="container">
+<!-- ritual circle: fixed behind content -->
+<svg id="ritualCircle" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="360" cy="360" r="340" fill="none" stroke="#c9a84c" stroke-width="0.7"/>
+  <circle cx="360" cy="360" r="305" fill="none" stroke="#c9a84c" stroke-width="0.4"/>
+  <circle cx="360" cy="360" r="250" fill="none" stroke="#3d7a78" stroke-width="0.55"/>
+  <circle cx="360" cy="360" r="170" fill="none" stroke="#c9a84c" stroke-width="0.4"/>
+  <circle cx="360" cy="360" r="80"  fill="none" stroke="#3d7a78" stroke-width="0.4"/>
+  <!-- tick marks on outer ring -->
+  <g stroke="#c9a84c" stroke-width="0.6">
+    <line x1="360" y1="20" x2="360" y2="48"/>
+    <line x1="360" y1="672" x2="360" y2="700"/>
+    <line x1="20" y1="360" x2="48" y2="360"/>
+    <line x1="672" y1="360" x2="700" y2="360"/>
+    <line x1="120" y1="120" x2="140" y2="140"/>
+    <line x1="580" y1="580" x2="600" y2="600"/>
+    <line x1="580" y1="140" x2="600" y2="120"/>
+    <line x1="120" y1="600" x2="140" y2="580"/>
+    <line x1="207" y1="60" x2="216" y2="76"/>
+    <line x1="513" y1="60" x2="504" y2="76"/>
+    <line x1="60" y1="513" x2="76" y2="504"/>
+    <line x1="660" y1="513" x2="644" y2="504"/>
+    <line x1="60" y1="207" x2="76" y2="216"/>
+    <line x1="660" y1="207" x2="644" y2="216"/>
+    <line x1="207" y1="660" x2="216" y2="644"/>
+    <line x1="513" y1="660" x2="504" y2="644"/>
+  </g>
+  <!-- heptagram -->
+  <polygon points="360,115 435,305 630,305 475,415 530,610 360,495 190,610 245,415 90,305 285,305"
+    fill="none" stroke="#c9a84c" stroke-width="0.55" opacity="0.75"/>
+  <!-- inner triangle -->
+  <polygon points="360,210 505,455 215,455"
+    fill="none" stroke="#3d7a78" stroke-width="0.5" opacity="0.65"/>
+  <!-- eye at center -->
+  <ellipse cx="360" cy="360" rx="44" ry="27" fill="none" stroke="#c9a84c" stroke-width="0.7"/>
+  <circle  cx="360" cy="360" r="16"  fill="none" stroke="#3d7a78" stroke-width="0.6"/>
+  <circle  cx="360" cy="360" r="5"   fill="#c9a84c" opacity="0.55"/>
+  <!-- abstract rune marks around middle ring -->
+  <g stroke="#c9a84c" stroke-width="0.55" fill="none" opacity="0.65">
+    <path d="M360,60 l-5,15 l10,0 l-5,-15"/>
+    <path d="M458,84 l-9,13 l9,4 l-9,0"/>
+    <path d="M262,84 l9,13 l-9,4 l9,0"/>
+    <path d="M562,168 l-15,7 l6,11"/>
+    <path d="M158,168 l15,7 l-6,11"/>
+    <path d="M612,265 l-15,4 l4,13"/>
+    <path d="M108,265 l15,4 l-4,13"/>
+    <path d="M612,456 l-15,-4 l4,-13"/>
+    <path d="M108,456 l15,-4 l-4,-13"/>
+    <path d="M562,553 l-15,-7 l6,-11"/>
+    <path d="M158,553 l15,-7 l-6,-11"/>
+    <path d="M458,636 l-9,-13 l9,-4 l-9,0"/>
+    <path d="M262,636 l9,-13 l-9,-4 l9,0"/>
+  </g>
+</svg>
 
-<h1>MASQUIEL</h1>
-<div class="subtitle">False Prophet of Emris</div>
-
-<div class="divider"></div>
-
-<div class="section">
-
-<div class="section-title">Overview</div>
-
-<div class="panel">
-Masquiel believes himself chosen by the god Emris to interpret divine signs.
-
-Through dreams, whispers, and the endless rhythm of the sea, he records prophecies he believes come from the heavens.
-
-Yet the voice guiding him may not belong to Emris at all.
+<div class="vignette"></div>
+<div class="sea-shimmer">
+  <div class="shimmer-line"></div>
+  <div class="shimmer-line"></div>
+  <div class="shimmer-line"></div>
 </div>
 
+<div class="page">
+
+  <header class="header reveal">
+    <div class="header-pre">✦ &nbsp; Coral SMP — Character Dossier &nbsp; ✦</div>
+    <div class="eye-container">
+      <div class="eye-ring"></div>
+      <div class="eye-ring"></div>
+      <div class="eye-dot"></div>
+    </div>
+    <h1 class="name">Masquiel</h1>
+    <div class="epithet">The False Prophet</div>
+    <div class="faith-badge">Faith of Emris</div>
+  </header>
+
+  <div class="sdiv reveal">
+    <div class="sdiv-line"></div>
+    <div class="sdiv-glyph">✦ ✦ ✦</div>
+    <div class="sdiv-line"></div>
+  </div>
+
+  <section class="section reveal">
+    <div class="sec-label">Overview</div>
+    <div class="sec-title">The Prophet's Account</div>
+    <div class="panel">
+      <p>Masquiel believes himself chosen by the god Emris to interpret divine signs. Through dreams, whispers carried on the tides, and the endless rhythm of the sea, he records prophecies he is certain come from the heavens above Coral Island.</p>
+      <p>He arrived on the island among the others — ordinary in every visible way. What separates him is the voice. It began as faint murmuring beneath the waves. It grew into something more.</p>
+      <p>He does not question it. He records it. He believes.</p>
+      <p>Yet the voice he follows may not belong to Emris at all.</p>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="sec-label">Dossier</div>
+    <div class="sec-title">Character Record</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-label">Role</div><div class="stat-value">Cultist &amp; Prophet</div></div>
+      <div class="stat"><div class="stat-label">Faith</div><div class="stat-value">Emris</div></div>
+      <div class="stat"><div class="stat-label">Status</div><div class="stat-value">Receiving Visions</div></div>
+      <div class="stat"><div class="stat-label">Alignment</div><div class="stat-value u">Unknown</div></div>
+    </div>
+  </section>
+
+  <div class="sdiv reveal">
+    <div class="sdiv-line"></div>
+    <div class="sdiv-glyph">✦</div>
+    <div class="sdiv-line"></div>
+  </div>
+
+  <section class="section reveal">
+    <div class="sec-label">Ritual Conduct</div>
+    <div class="sec-title">Religious Practices</div>
+    <ul class="practice-list">
+      <li class="pi"><span class="pnum">I</span><span class="ptext">Records every vision faithfully in a personal manuscript, sealed in wax, written in the hours before dawn.</span></li>
+      <li class="pi"><span class="pnum">II</span><span class="ptext">Watches the ocean at the hours when tide and sky meet, searching for signs left by Emris in the water's movement.</span></li>
+      <li class="pi"><span class="pnum">III</span><span class="ptext">Performs quiet rituals through the night hours — candles, spoken words, the counting of waves.</span></li>
+      <li class="pi"><span class="pnum">IV</span><span class="ptext">Spreads the word of Emris among those on the island, with a quiet certainty that unsettles some and draws in others.</span></li>
+    </ul>
+  </section>
+
+  <section class="section reveal">
+    <div class="sec-label">The Manuscript</div>
+    <div class="sec-title">Prophecy Log</div>
+    <div class="plog">
+      <div class="pcy">
+        <div class="pcy-hd" onclick="toggleP(0)">
+          <span class="pcy-num">Vision I</span>
+          <span class="pcy-prev">"The ocean whispers your purpose."</span>
+          <span class="pcy-tog">▾</span>
+        </div>
+        <div class="pcy-body">
+          <div class="pcy-content">
+            <blockquote>"The ocean whispers your purpose."</blockquote>
+            <div class="note"><span class="nlabel">Recorded —</span>The first words Masquiel heard. He was standing at the shore, alone, watching the water pull back from the sand. He believed it to be Emris welcoming him to the island.</div>
+          </div>
+        </div>
+      </div>
+      <div class="pcy">
+        <div class="pcy-hd" onclick="toggleP(1)">
+          <span class="pcy-num">Vision II</span>
+          <span class="pcy-prev">"The island will become sacred ground."</span>
+          <span class="pcy-tog">▾</span>
+        </div>
+        <div class="pcy-body">
+          <div class="pcy-content">
+            <blockquote>"The island will become sacred ground."</blockquote>
+            <div class="note"><span class="nlabel">Recorded —</span>Received in the depth of night. Masquiel woke with the words already leaving his mouth. He does not know what must happen before the island is made sacred. He waits for further instruction.</div>
+          </div>
+        </div>
+      </div>
+      <div class="pcy">
+        <div class="pcy-hd" onclick="toggleP(2)">
+          <span class="pcy-num">Vision III</span>
+          <span class="pcy-prev">"The faithful must prepare."</span>
+          <span class="pcy-tog">▾</span>
+        </div>
+        <div class="pcy-body">
+          <div class="pcy-content">
+            <blockquote>"The faithful must prepare."</blockquote>
+            <div class="note"><span class="nlabel">Recorded —</span>The most recent vision. It carries urgency the others did not. Prepare for what, the voice did not say. Masquiel has begun speaking to others about it. He does not notice the way the voice changes when he does.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sdiv reveal">
+    <div class="sdiv-line"></div>
+    <div class="sdiv-glyph">✦ ✦ ✦</div>
+    <div class="sdiv-line"></div>
+  </div>
+
+  <section class="section reveal">
+    <div class="sec-label">Sealed Record</div>
+    <div class="sec-title">The Hidden Truth</div>
+    <div class="truth">
+      <div class="truth-hd">
+        <div class="truth-seal">✗</div>
+        <div class="truth-title">Known only to the heavens</div>
+      </div>
+      <div class="truth-body">
+        <p>The voice Masquiel hears does not belong to Emris.</p>
+        <p>Emris created the world — shaped the ocean and the island, breathed life into creatures and land. He watches his creation from above with something like care.</p>
+        <p>But Emris did not choose Masquiel. The voice that calls itself divine, that feeds him visions and whispers purpose into his waking hours — it belongs to something else entirely. Something that has learned to wear the name of a god like borrowed clothing.</p>
+        <p>Masquiel has yet to realize the deception. His faith is genuine. His devotion is real. That is precisely what makes him useful.</p>
+      </div>
+    </div>
+    <div class="pring reveal">
+      <span class="pring-label">The True Source</span>
+      <div class="pring-name">Pring</div>
+      <div class="pring-desc">A shapeshifter. Created incomplete and hidden away in the world, shaped by no one fully. He carries hatred and vengeance where his form was never finished. He does not announce himself. He finds those who are already listening — and gives them something to hear.</div>
+    </div>
+  </section>
+
+  <div class="footer reveal">
+    <div class="footer-seal"><div class="footer-glyph">✦</div></div>
+    <div class="footer-text">✦ &nbsp; CORAL SMP &nbsp; ✦ &nbsp; CHARACTER LOG &nbsp; ✦</div>
+  </div>
+
 </div>
 
-<div class="section">
+<script>
+/* CANVAS: deep ocean + drifting particles + wave crests */
+const cv = document.getElementById('bgCanvas');
+const cx = cv.getContext('2d');
+let W, H, pts, wo = 0;
 
-<div class="section-title">Character Information</div>
+function resize() {
+  W = cv.width = window.innerWidth;
+  H = cv.height = window.innerHeight;
+  initPts();
+}
 
-<div class="panel">
+function initPts() {
+  pts = [];
+  const n = Math.floor(W * H / 12000);
+  for (let i = 0; i < n; i++) {
+    pts.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.1 + 0.2,
+      vy: -(Math.random() * 0.12 + 0.02),
+      vx: (Math.random() - 0.5) * 0.05,
+      a: Math.random() * 0.5 + 0.08,
+      tp: Math.random() * Math.PI * 2,
+      ts: Math.random() * 0.006 + 0.003,
+      gold: Math.random() < 0.07
+    });
+  }
+}
 
-Role: Cultist / Prophet<br>
-Faith: Emris<br>
-Status: Receiving Visions<br>
-Alignment: Unknown
+function draw(t) {
+  wo = t * 0.0008;
 
-</div>
+  /* base gradient */
+  const g = cx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0,    '#020109');
+  g.addColorStop(0.28, '#04020e');
+  g.addColorStop(0.55, '#030710');
+  g.addColorStop(0.82, '#020b14');
+  g.addColorStop(1,    '#010a10');
+  cx.fillStyle = g;
+  cx.fillRect(0, 0, W, H);
 
-</div>
+  /* nebula wisps */
+  const n1x = W * 0.32 + Math.sin(wo * 0.4) * 35;
+  const nb1 = cx.createRadialGradient(n1x, H * 0.25, 0, n1x, H * 0.25, W * 0.32);
+  nb1.addColorStop(0, 'rgba(38,18,65,.08)');
+  nb1.addColorStop(1, 'transparent');
+  cx.fillStyle = nb1; cx.fillRect(0, 0, W, H);
 
-<div class="section">
+  const n2x = W * 0.7 + Math.cos(wo * 0.3) * 28;
+  const nb2 = cx.createRadialGradient(n2x, H * 0.42, 0, n2x, H * 0.42, W * 0.26);
+  nb2.addColorStop(0, 'rgba(12,45,45,.06)');
+  nb2.addColorStop(1, 'transparent');
+  cx.fillStyle = nb2; cx.fillRect(0, 0, W, H);
 
-<div class="section-title">Religious Practices</div>
+  /* particles */
+  pts.forEach(p => {
+    const tw = 0.45 + 0.55 * Math.sin(p.tp + t * p.ts);
+    const al = p.a * tw;
+    if (p.gold) {
+      cx.fillStyle = `rgba(201,168,76,${al * 0.75})`;
+      cx.beginPath(); cx.arc(p.x, p.y, p.r * 1.4, 0, Math.PI * 2); cx.fill();
+      cx.strokeStyle = `rgba(201,168,76,${al * 0.28})`;
+      cx.lineWidth = 0.4;
+      cx.beginPath();
+      cx.moveTo(p.x - 3.5, p.y); cx.lineTo(p.x + 3.5, p.y);
+      cx.moveTo(p.x, p.y - 3.5); cx.lineTo(p.x, p.y + 3.5);
+      cx.stroke();
+    } else {
+      cx.fillStyle = `rgba(215,198,160,${al})`;
+      cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI * 2); cx.fill();
+    }
+    p.y += p.vy; p.x += p.vx;
+    if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
+    if (p.x < -4) p.x = W + 4;
+    if (p.x > W + 4) p.x = -4;
+  });
 
-<div class="panel">
+  /* wave crests near bottom */
+  for (let i = 0; i < 4; i++) {
+    const by = H - 50 - i * 32;
+    const amp = 3.5 + i * 1.5;
+    const freq = 0.007 - i * 0.0007;
+    const phase = wo * (0.5 + i * 0.18) + i * 1.4;
+    cx.beginPath();
+    cx.moveTo(0, by + Math.sin(0 * freq + phase) * amp);
+    for (let x = 0; x <= W; x += 3) {
+      cx.lineTo(x, by + Math.sin(x * freq + phase) * amp);
+    }
+    cx.strokeStyle = `rgba(61,122,120,${0.065 - i * 0.013})`;
+    cx.lineWidth = 0.8;
+    cx.stroke();
+  }
 
-• Records visions in a personal manuscript<br>
-• Watches the ocean for divine signs<br>
-• Performs rituals during the quiet hours of night<br>
-• Spreads the word of Emris
+  requestAnimationFrame(draw);
+}
 
-</div>
+window.addEventListener('resize', resize);
+resize();
+requestAnimationFrame(draw);
 
-</div>
+/* PROPHECY TOGGLE */
+function toggleP(i) {
+  const all = document.querySelectorAll('.pcy');
+  const el = all[i];
+  const was = el.classList.contains('open');
+  all.forEach(p => p.classList.remove('open'));
+  if (!was) el.classList.add('open');
+}
 
-<div class="section">
-
-<div class="section-title">Prophecy Log</div>
-
-<details>
-<summary>Vision I</summary>
-<div class="vision">
-"The ocean whispers your purpose."
-</div>
-</details>
-
-<details>
-<summary>Vision II</summary>
-<div class="vision">
-"The island will become sacred ground."
-</div>
-</details>
-
-<details>
-<summary>Vision III</summary>
-<div class="vision">
-"The faithful must prepare."
-</div>
-</details>
-
-</div>
-
-<div class="section">
-
-<div class="section-title">Hidden Truth</div>
-
-<div class="secret">
-
-The voice Masquiel hears may belong to another god entirely.
-
-A being that hides behind the name of Emris and slowly shapes the prophet's path for its own unknown purpose.
-
-Masquiel has yet to realize the deception.
-
-</div>
-
-</div>
-
-</div>
-
+/* SCROLL REVEAL */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
-
 </html>
